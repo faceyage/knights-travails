@@ -14,11 +14,11 @@ function knightMoves(knightPos, targetPos) {
   }
 
   //start queue from knight and make it visited as default
-  queue.push(knight);
   visited[knightPos[0]][knightPos[1]] = true;
-
+  queue.push(knight);
   //to record path
   let prev = knight;
+
   while (queue.length !== 0) {
     let curr = queue.shift();
     if (curr.dist >= prev.dist) prev = curr;
@@ -45,9 +45,7 @@ function knightMoves(knightPos, targetPos) {
       //visit node if not visited
       if (!visited[x][y]) {
         visited[x][y] = true;
-
-        const nextMove = new Cell(x, y, curr.dist + 1, prev);
-        queue.push(nextMove);
+        queue.push(new Cell(x, y, curr.dist + 1, prev));
       }
     });
   }
@@ -67,6 +65,7 @@ class Cell {
   findPossibleMoves(x = this.x, y = this.y) {
     const X = [2, 1, -1, -2, -2, -1, 1, 2];
     const Y = [1, 2, 2, 1, -1, -2, -2, -1];
+
     const moves = [];
     for (let i = 0; i < X.length; i++) {
       const _x = x + X[i];
@@ -84,4 +83,4 @@ class Cell {
   }
 }
 
-const result = knightMoves([3, 3], [4, 3]);
+const result = knightMoves([4, 5], [1, 1]);
